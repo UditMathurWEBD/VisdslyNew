@@ -1,6 +1,12 @@
 import { Box, IconButton, useTheme } from "@mui/material";
+import * as React from 'react';
 import { useContext } from "react";
+
 import { ColorModeContext, tokens } from "../../theme";
+
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 import {
   BrowserRouter as Router,
@@ -10,9 +16,21 @@ import {
 } from "react-router-dom";
 
 import LogoutIcon from '@mui/icons-material/Logout';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import PersonPinOutlinedIcon from '@mui/icons-material/PersonPinOutlined';
 import Login from "../login/login";
+import { ArrowDropDownCircle } from "@mui/icons-material";
 
 const Topbar = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
@@ -33,6 +51,7 @@ const Topbar = () => {
 
       {/* ICONS */}
       <Box display="flex">
+
         {/* <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />
@@ -45,13 +64,40 @@ const Topbar = () => {
         
         
 
-        </IconButton> */}
-        {/* <IconButton>
+        </IconButton>
+        <IconButton>
           <SettingsOutlinedIcon />
         </IconButton>
         <IconButton>
-          <PersonOutlinedIcon />
+          <PersonPinOutlinedIcon />
         </IconButton> */}
+
+<div>
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        className="top-right-button"
+      >
+        Youtuber Name <ArrowDropDownCircle></ArrowDropDownCircle>
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose}><a className="myprofile" href="/myprofile" >Profile</a></MenuItem>
+        <MenuItem onClick={handleClose}>Settings</MenuItem>
+        <MenuItem onClick={handleClose}><a className="myprofile" href="/logout" >Logout</a></MenuItem>
+      </Menu>
+    </div>
+   
       </Box>
     </Box>
   );

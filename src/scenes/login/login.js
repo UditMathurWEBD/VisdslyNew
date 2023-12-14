@@ -49,16 +49,23 @@ const Login = () => {
 </div>
 
 
+<div class="form-checkbox-new">
+<label class="container"><p><a href="/signup" class="text-forgot-pass">Forgot Password?</a>.</p>
+
+
+</label>
+</div>
+
+<div class="form-row-last">
+<button type="submit" class="register forgotpass" >Login Here</button>
+</div>
 
 
 <div class="form-checkbox">
-<label class="container"><p>I do accept the <a href="/dashboard" class="text">Terms and Conditions</a> of your site.</p>
-<input type="checkbox" name="checkbox" />
-<span class="checkmark"></span>
+<label class="container"><p>Don't have an account? <a href="/signup" class="text">Signup Here</a>.</p>
+
+
 </label>
-</div>
-<div class="form-row-last">
-<input type="submit" name="" class="register" placeholder="Login" />
 </div>
 </div>
 </form>

@@ -127,17 +127,17 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Data
-            </Typography>
             <Item
               title="Payments"
               to="/payments"
               icon={<PaymentIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+               <Item
+              title="My Profile"
+              to="/myprofile"
+              icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -163,13 +163,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Pages
-            </Typography>
+          
             <Item
               title="Profile Form"
               to="/form"
@@ -192,20 +186,20 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            <Typography
+            {/* <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
            Log Out
-            </Typography>
-            <Item
+            </Typography> */}
+            {/* <Item
               title="Logout"
               to="/logout"
               icon={<LogoutIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             {/* <Item
               title="Pie Chart"
               to="/pie"

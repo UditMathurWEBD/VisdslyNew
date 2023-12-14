@@ -1,12 +1,11 @@
 import { Box,  IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 
-import './signup.css';
+import './forgotpass.css';
 
-const Signup = () => {
+const ForgotPass = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -16,7 +15,7 @@ const Signup = () => {
 <div class="page-content">
 <div class="form-v10-content">
 <form class="form-detail" action="#" method="post" id="myform">
-<div class="form-left">
+{/* <div class="form-left">
 <h2>Signup Form</h2>
 
 <div class="form-group">
@@ -37,41 +36,31 @@ const Signup = () => {
 <div class="form-row">
 <input type="text" name="company" class="company"  placeholder="Enter Password Again" required />
 </div>
-<div class="form-row">
-<input type="text" name="company" class="company"  placeholder="Enter Referal Code (Optional)" />
-</div>
 <div class="register-here"><button class="register-button" type="submit"><a href="#">Register Here</a></button></div>
 
-<div class="form-checkbox">
-<label class="container"><p className="login-option-here">Don't have an account? <a href="/login" className="text-signup-here">Signup Here</a>.</p>
-
-
-</label>
-</div>
-
-</div>
-{/* <div class="form-right">
-<h2>Login Here</h2>
-<div class="form-row">
-<input type="text" name="street" class="street" id="street" placeholder="Username" required />
-</div>
-<div class="form-row">
-<input type="text" name="additional" class="additional" id="additional" placeholder="Password" required />
-</div>
-
-
-
-
-<div class="form-checkbox">
-<label class="container"><p>I do accept the <a href="#" class="text">Terms and Conditions</a> of your site.</p>
-<input type="checkbox" name="checkbox" />
-<span class="checkmark"></span>
-</label>
-</div>
-<div class="form-row-last">
-<input type="submit" name="" class="register" placeholder="Login" />
-</div>
 </div> */}
+<div class="form-right">
+<h2>Forgot Password</h2>
+<div class="form-row">
+<input type="text" name="street" class="street" id="street" placeholder="Enter Your Username" required />
+</div>
+
+
+
+
+
+<div class="form-row-last">
+    <button type="submit" class="register forgotpass" >Send</button>
+</div>
+
+
+<div class="form-checkbox">
+<label class="container"><p><a href="/signup" class="text">Login Here</a>.</p>
+
+
+</label>
+</div>
+</div>
 </form>
 </div>
 </div>
@@ -81,4 +70,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default ForgotPass;

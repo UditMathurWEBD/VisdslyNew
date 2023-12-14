@@ -18,6 +18,9 @@ import Calendar from "./scenes/calendar/calendar";
 import Payments from "./scenes/Payments";
 import Login from './scenes/login/login';
 import Signup from './scenes/signup/signup';
+import ForgotPass from "./scenes/forgotPassword/forgotpass";
+import MyProfileForm from "./scenes/myprofile/myProfile";
+import ResetPassword from "./scenes/resetPassword/resetPassword";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -27,11 +30,9 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        {/* <div>
-          <Login></Login> 
-         <Signup></Signup>
-        </div> */}
-        <div className="app">
+       <ResetPassword></ResetPassword>
+      
+        {/* <div className="app">
           <Sidebar isSidebar={isSidebar} />
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
@@ -39,6 +40,7 @@ function App() {
            
               <Route path="/" element={<Dashboard />} />
               <Route path="/payments" element={<Payments />} />
+              <Route path="/myprofile" element={<MyProfileForm></MyProfileForm>} />
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
@@ -50,10 +52,13 @@ function App() {
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} />
               <Route path="/logout" element={<Login />} />
+            
             </Routes>
+          
           </main>
           
-        </div>
+        </div> */}
+     
 
       </ThemeProvider>
     </ColorModeContext.Provider>

@@ -201,11 +201,9 @@ const Dashboard = () => {
                   variant="h5"
                   fontWeight="600"
                 >
-                  Youtuber Name
-                </Typography>
-                <Typography color={colors.grey[100]}>
                   Video Name
                 </Typography>
+              
               </Box>
               <Box color={colors.grey[100]}>{transaction.date}</Box>
               <Box
