@@ -1,12 +1,12 @@
 import { Box, IconButton, useTheme } from "@mui/material";
-import * as React from 'react';
+import * as React from "react";
 import { useContext } from "react";
 
 import { ColorModeContext, tokens } from "../../theme";
 
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 import {
   BrowserRouter as Router,
@@ -15,11 +15,12 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import LogoutIcon from '@mui/icons-material/Logout';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import PersonPinOutlinedIcon from '@mui/icons-material/PersonPinOutlined';
+import LogoutIcon from "@mui/icons-material/Logout";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import PersonPinOutlinedIcon from "@mui/icons-material/PersonPinOutlined";
 import Login from "../login/login";
 import { ArrowDropDownCircle } from "@mui/icons-material";
+import AuthContext from "../../context/AuthContext";
 
 const Topbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -34,6 +35,7 @@ const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const { logoutUser } = useContext(AuthContext);
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
@@ -51,7 +53,6 @@ const Topbar = () => {
 
       {/* ICONS */}
       <Box display="flex">
-
         {/* <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />
@@ -72,32 +73,39 @@ const Topbar = () => {
           <PersonPinOutlinedIcon />
         </IconButton> */}
 
-<div>
-      <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-        className="top-right-button"
-      >
-        Youtuber Name <ArrowDropDownCircle></ArrowDropDownCircle>
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={handleClose}><a className="myprofile" href="/myprofile" >Profile</a></MenuItem>
-        <MenuItem onClick={handleClose}>Settings</MenuItem>
-        <MenuItem onClick={handleClose}><a className="myprofile" href="/logout" >Logout</a></MenuItem>
-      </Menu>
-    </div>
-   
+        <div>
+          <Button
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+            className="top-right-button"
+          >
+            Youtuber Name <ArrowDropDownCircle></ArrowDropDownCircle>
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={handleClose}>
+              <a className="myprofile" href="/myprofile">
+                Profile
+              </a>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>Settings</MenuItem>
+            <MenuItem onClick={logoutUser}>
+              <a className="myprofile" href="/login">
+                Logout
+              </a>
+            </MenuItem>
+          </Menu>
+        </div>
       </Box>
     </Box>
   );

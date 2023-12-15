@@ -1,79 +1,87 @@
-import { Box,  IconButton, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import React, { useState, useEffect, useContext } from "react";
+import AuthContext from "../../context/AuthContext";
+// import jwtDecode from "jwt-decode";
 
-import './login.css';
+
 
 const Login = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  const { loginUser } = useContext(AuthContext);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    loginUser(email, password);
+  };
 
   return (
-   <div>
-      
-<div class="page-content">
-<div class="form-v10-content">
-<form class="form-detail" action="#" method="post" id="myform">
-{/* <div class="form-left">
-<h2>Signup Form</h2>
+    <div>
+      <div className="page-content">
+        <div className="form-v10-content">
+          <form className="form-detail" onSubmit={handleLogin} id="myform">
+            <div className="form-right">
+              <h2>Login Here</h2>
+              {error && <p style={{ color: "red" }}>{error}</p>}
+              <div className="form-row">
+                <input
+                  type="text"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="street"
+                  id="street"
+                  placeholder="Enter email"
+                  required
+                />
+              </div>
+              <div className="form-row">
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="additional"
+                  id="additional"
+                  placeholder="Enter Password"
+                  required
+                />
+              </div>
 
-<div class="form-group">
-<div class="form-row form-row-1">
-<input type="text" name="first_name" id="first_name" class="input-text" placeholder="First Name" required />
-</div>
-<div class="form-row form-row-2">
-<input type="text" name="last_name" id="last_name" class="input-text" placeholder="Last Name" required />
-</div>
-</div>
+              <div className="form-checkbox-new">
+                <label className="container">
+                  <p>
+                    <a href="/forgotpass" className="text-forgot-pass">
+                      Forgot Password?
+                    </a>
+                    .
+                  </p>
+                </label>
+              </div>
 
-<div class="form-row">
-<input type="text" name="company" class="company"  placeholder="Enter Email Id" required />
-</div>
-<div class="form-row">
-<input type="text" name="company" class="company"  placeholder="Enter Password" required />
-</div>
-<div class="form-row">
-<input type="text" name="company" class="company"  placeholder="Enter Password Again" required />
-</div>
-<div class="register-here"><button class="register-button" type="submit"><a href="#">Register Here</a></button></div>
+              <div className="form-row-last">
+                <button type="submit" className="register forgotpass">
+                  Login Here
+                </button>
+              </div>
 
-</div> */}
-<div class="form-right">
-<h2>Login Here</h2>
-<div class="form-row">
-<input type="text" name="street" class="street" id="street" placeholder="Username" required />
-</div>
-<div class="form-row">
-<input type="text" name="additional" class="additional" id="additional" placeholder="Password" required />
-</div>
-
-
-<div class="form-checkbox-new">
-<label class="container"><p><a href="/signup" class="text-forgot-pass">Forgot Password?</a>.</p>
-
-
-</label>
-</div>
-
-<div class="form-row-last">
-<button type="submit" class="register forgotpass" >Login Here</button>
-</div>
-
-
-<div class="form-checkbox">
-<label class="container"><p>Don't have an account? <a href="/signup" class="text">Signup Here</a>.</p>
-
-
-</label>
-</div>
-</div>
-</form>
-</div>
-</div>
-
-
-   </div>
+              <div className="form-checkbox">
+                <label className="container">
+                  <p>
+                    Don't have an account?{" "}
+                    <a href="/signup" className="text">
+                      Signup Here
+                    </a>
+                    .
+                  </p>
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 

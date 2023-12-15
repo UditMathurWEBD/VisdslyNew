@@ -1,73 +1,78 @@
-import { Box,  IconButton, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+// ForgotPass.jsx
 
-import './forgotpass.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { tokens } from "../../theme";
 
 const ForgotPass = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+    const [email, setEmail] = useState("");
+    const navigate = useNavigate();
 
-  return (
-   <div>
-      
-<div class="page-content">
-<div class="form-v10-content">
-<form class="form-detail" action="#" method="post" id="myform">
-{/* <div class="form-left">
-<h2>Signup Form</h2>
+    const handleForgotPassword = async (e) => {
+        e.preventDefault();
 
-<div class="form-group">
-<div class="form-row form-row-1">
-<input type="text" name="first_name" id="first_name" class="input-text" placeholder="First Name" required />
-</div>
-<div class="form-row form-row-2">
-<input type="text" name="last_name" id="last_name" class="input-text" placeholder="Last Name" required />
-</div>
-</div>
+        try {
+            const response = await fetch("http://127.0.0.1:8000/api/user/forgotPassword", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email }),
+            });
 
-<div class="form-row">
-<input type="text" name="company" class="company"  placeholder="Enter Email Id" required />
-</div>
-<div class="form-row">
-<input type="text" name="company" class="company"  placeholder="Enter Password" required />
-</div>
-<div class="form-row">
-<input type="text" name="company" class="company"  placeholder="Enter Password Again" required />
-</div>
-<div class="register-here"><button class="register-button" type="submit"><a href="#">Register Here</a></button></div>
+            if (response.ok) {
+                alert("Password reset link sent successfully!");
+                navigate("/login"); // Redirect to login page after sending the reset link
+            } else {
+                const data = await response.json();
+                alert(`Error: ${data.error}`);
+            }
+        } catch (error) {
+            console.error("Error during forgot password:", error.message);
+            alert("An error occurred during forgot password");
+        }
+    };
 
-</div> */}
-<div class="form-right">
-<h2>Forgot Password</h2>
-<div class="form-row">
-<input type="text" name="street" class="street" id="street" placeholder="Enter Your Username" required />
-</div>
-
-
-
-
-
-<div class="form-row-last">
-    <button type="submit" class="register forgotpass" >Send</button>
-</div>
-
-
-<div class="form-checkbox">
-<label class="container"><p><a href="/signup" class="text">Login Here</a>.</p>
-
-
-</label>
-</div>
-</div>
-</form>
-</div>
-</div>
-
-
-   </div>
-  );
+    return (
+        <div>
+            <div className="page-content">
+                <div className="form-v10-content">
+                    <form className="form-detail" onSubmit={handleForgotPassword} id="myform">
+                        <div className="form-right">
+                            <h2>Forgot Password</h2>
+                            <div className="form-row">
+                                <input
+                                    type="text"
+                                    name="username"
+                                    className="street"
+                                    id="street"
+                                    placeholder="Enter Your Email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="form-row-last">
+                                <button type="submit" className="register forgotpass">
+                                    Send
+                                </button>
+                            </div>
+                            <div className="form-checkbox">
+                                <label className="container">
+                                    <p>
+                                        <a href="/login" className="text">
+                                            Login Here
+                                        </a>
+                                        .
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default ForgotPass;

@@ -16,31 +16,49 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
 import Payments from "./scenes/Payments";
-import Login from './scenes/login/login';
-import Signup from './scenes/signup/signup';
+import Login from "./scenes/login/login";
+import Signup from "./scenes/signup/signup";
 import ForgotPass from "./scenes/forgotPassword/forgotpass";
 import MyProfileForm from "./scenes/myprofile/myProfile";
 import ResetPassword from "./scenes/resetPassword/resetPassword";
+// import NotFoundRoute from "./scenes/404/404";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
 
+  const shouldRenderTopbarAndSidebar = (path) => {
+    // Define the paths where you want to hide Topbar and Sidebar
+    const pathsWithoutTopbarAndSidebar = [
+      "/login",
+      "/signup",
+      "/forgotpass",
+      /^\/resetPassword\/.*$/,
+    ];
+
+    // Check if the current path is in the exclusion list
+    return !pathsWithoutTopbarAndSidebar.some((pattern) =>
+      typeof pattern === "string" ? path === pattern : pattern.test(path)
+    );
+  };
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-       <ResetPassword></ResetPassword>
-      
-        {/* <div className="app">
-          <Sidebar isSidebar={isSidebar} />
+
+        <div className="app">
+          {shouldRenderTopbarAndSidebar(window.location.pathname) && (
+            <Sidebar isSidebar={isSidebar} />
+          )}
           <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
+            {shouldRenderTopbarAndSidebar(window.location.pathname) && (
+              <Topbar setIsSidebar={setIsSidebar} />
+            )}
             <Routes>
-           
               <Route path="/" element={<Dashboard />} />
               <Route path="/payments" element={<Payments />} />
-              <Route path="/myprofile" element={<MyProfileForm></MyProfileForm>} />
+              <Route path="/myprofile" element={<MyProfileForm />} />
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
@@ -51,15 +69,16 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} />
-              <Route path="/logout" element={<Login />} />
-            
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/forgotpass" element={<ForgotPass />} />
+              <Route
+                path="/resetPassword/:id/:token"
+                element={<ResetPassword />}
+              />
             </Routes>
-          
           </main>
-          
-        </div> */}
-     
-
+        </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
